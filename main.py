@@ -48,10 +48,10 @@ class expense_report:
         # Find all matches in the string
         prices = re.findall(pattern, text)
 
-        maxi = prices[0]
-
+        maxi = float(prices[0])
+        print(prices)
         for i in range(1, len(prices)):
-            maxi = max(prices[i], maxi)
+            maxi = max(float(prices[i]), maxi)
 
         return maxi
 
