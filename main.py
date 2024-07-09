@@ -43,15 +43,15 @@ class expense_report:
         return dates
     
     def get_price(self, text):
-        # pattern = r'\b*\d+\.\d{2}\b'
+        pattern = r'\b*\d+\.\d{2}\b'
 
-        # # Find all matches in the string
-        # prices = re.findall(pattern, text)
+        # Find all matches in the string
+        prices = re.findall(pattern, text)
 
-        # maxi = float(prices[0])
-        # print(prices)
-        # for i in range(1, len(prices)):
-        #     maxi = max(float(prices[i]), maxi)
-        maxi = 0
+        maxi = float(prices[0])
+        print(prices)
+        for i in range(1, len(prices)):
+            maxi = max(float(prices[i]), maxi)
+
         return maxi
 
