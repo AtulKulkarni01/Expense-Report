@@ -14,6 +14,8 @@ class expense_report:
         doc = self.nlp(" ".join(result))
         joined_text = " ".join(result)
 
+
+        print(joined_text)
         company_name = self.get_company_name(doc)
         date = self.get_date(joined_text)
         print("THis is the date :", set(date).pop())

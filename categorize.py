@@ -2,10 +2,9 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet
 from csv import writer
-import csv
 
 class Categorize:
-    def __init__(self) -> None:
+    def __init__(self):
         self.tokenizer = nltk.RegexpTokenizer(r"\w+")
         self.stop_words = set(nltk.corpus.stopwords.words('english'))
         self.categories = self.build_categories()
@@ -29,10 +28,9 @@ class Categorize:
         return synonyms
 
     def categorize(self, text, st, head, x):
-        new_words = self.tokenizer.tokenize(text)
+        new_words = self.tokenizer.tokenize(text.lower())  # Convert text to lowercase for case-insensitive matching
         filtered_list = [w for w in new_words if w not in self.stop_words]
 
-        # Check which category the words belong to
         category = "others"
         for word in filtered_list:
             for cat, words in self.categories.items():
@@ -53,9 +51,10 @@ class Categorize:
             csv_writer.writerow(list_of_elem)
 
 # Example usage
-text = "Logan's Auto Repair Shop AUTO SHOP 154 Repair Avenue, London, UK +44 779 5633 875 VAT: 123 4567 89 Part no. Description Price Customer and Vehicle Information Ref # 6430 22541 Oil E50.00 Name  Sarah Brown Date1/1/21 22431 Oil Filter E20.00 Adaress:220 Customer Road, London, UK Due on: 3/1/21 44367 Air Filter {25.00 Year 2019 MakelModel Mercedes A Class VIN 4Y1SL658482411439 Phone: 07539891714 48908 Cabin Filter {25.00 Maior Service Oil change Minor overhaul Part Refitment Other 76532 Front Pads E90.00 No; InstructioniLabour Amount 2 43898 Rear Tyre E180.00 Oil, Oil filter, Air filter , cabin filter replaced E50.00 Front pads replaced {40.00 Rear tyres fitted, balanced and disposal of old tyres {45.00 Subject to terms and conditions as required by law. Total Parts {390.00 Total parts {390.00 Total Labor E135.00 The warranties as applicable for the parts will be as provided by the hereby authorize the company to perform the repair work Other Charges E0.00 manufacturer. The company' s liability will be limited to what is expressly as detailed above and to operateldrive the vehicle for the required by the applicable laws and will not extend beyond. purpose of inspection or testing: Tax E105.00 Signature: Sarah Brown Total Due E630.00 aty"
+text = "Walmart Save money. Live better. 386 - 6 72 2104 Mgr ROBERT   ROGERS 1521 GRANADA BLVD ORMOND BEACH FL 32174 ST# 00613 OP# 007671 TE# 07 TR# 02619 STB ALL PIN 002200001988 0 . 78 CABLE POUCH 068113118178 3 . 50 TRVL PILLOW 075057602322 9 . 97 SUBTOTAL 14.25 TAX 500 93 TOTAL 15.18 DEBIT TEND 15.18 CHANGE DUE 00 EFT DEBIT PAY FROM PRIMARY 15.18 TOTAL PURCHASE US DEBIT - 7641 REF 831600869690 NETWORK ID 0081 APPR CODE 870411 US DEBIT AID Aoooo00o980840 TC 9DE3EC353C6D6ADB *Pin Verified TERMINAL MX716047 11/11/18 23:37:13 ITEMS SOLD TC# 4903 0007 3123 6600 8297 11/11/18 23 : 37:18 WATCH OVER 6,000 FOR FREE MOVIES & TV Only at Vudu.com/WatchFree VUDU Walmart 's Digital Video Service"
 st = "08:00 AM"
 head = "John Doe"
 x = "Total: $100"
+
 categorizer = Categorize()
 categorizer.categorize(text, st, head, x)
