@@ -1,6 +1,7 @@
 from OCR import OCRHandler
 import spacy
 import regex as re
+from categorize import Categorize
 
 class expense_report:
     def __init__(self) -> None:
@@ -56,4 +57,9 @@ class expense_report:
             maxi = max(float(prices[i]), maxi)
 
         return maxi
+
+    def categorize(self, text, date_time, company, total_price):
+        categorizer = Categorize()
+        row_contents = categorizer.categorize(text, date_time, company, total_price)
+        categorizer.append_list_as_row('expenditure.csv', row_contents)
 
