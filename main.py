@@ -19,21 +19,25 @@ class expense_report:
         print(joined_text)
         company_name = self.get_company_name(doc)
         date = self.get_date(joined_text)
-        print("THis is the date :", set(date).pop())
+        date = set(date).pop()
+        print("THis is the date :", date)
 
         price = self.get_price(joined_text)
         print("this is the total amount : ", price)
 
+        self.categorize(joined_text, date, company_name, price)
+
     def get_company_name(self, doc):
         
         entities = [(ent.text, ent.label_) for ent in doc.ents]
-
+        company_name = None
         # Print the named entities
         for entity, label in entities:
             if label == 'ORG':
                 print(f"Company: {entity}")
+                company_name = entity
                 break
-
+        return company_name
     def get_date(self, text):
     
         date_pattern = r'\b\d{1,2}/\d{1,2}/\d{2}\b'

@@ -50,7 +50,7 @@ class Categorize:
         with open(file, 'a+', newline='', encoding='utf-8') as write_obj:
             csv_writer = writer(write_obj)
             if write_obj.tell() == 0:  # Check if the file is empty
-                csv_writer.writerow(["Start Time", "Head", "Total", "Category"])  # Write headers if the file is empty
+                csv_writer.writerow(["Date", "Company", "Total", "Category"])  # Write headers if the file is empty
             csv_writer.writerow(list_of_elem)
 
 
@@ -81,5 +81,5 @@ head = "Natalie"
 x = "Total: $200"
 
 categorizer = Categorize()
-row_contents = categorizer.categorize(text, st, head, x)
-categorizer.append_list_as_row('expenditure.csv', row_contents)
+# row_contents = categorizer.categorize(text, st, head, x)
+# categorizer.append_list_as_row('expenditure.csv', row_contents)
