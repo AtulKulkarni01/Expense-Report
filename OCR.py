@@ -22,7 +22,12 @@ class ImageTextExtractor:
         
         return gray
 
-    def extract_text(self, image):
+    def read_text_from_image(self, image):
+    
+        # Update this path to where Tesseract is installed
+        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+        # Your existing code
         gray = self.preprocess_image(image)
         text = pytesseract.image_to_string(gray)
         print(text)

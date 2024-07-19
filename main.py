@@ -1,19 +1,24 @@
 from OCR import OCRHandler
+from OCR import ImageTextExtractor
 import spacy
 import regex as re
 from categorize import Categorize
+import cv2
 
 class expense_report:
     def __init__(self) -> None:
-        self.ocr = OCRHandler()
+        # self.ocr = OCRHandler()
+        self.ocr = ImageTextExtractor()
         self.nlp = spacy.load("en_core_web_trf")
 
 
     def get_expense(self, image_path):
-        result = self.ocr.read_text_from_image(image_path=image_path)
 
-        doc = self.nlp(" ".join(result))
-        joined_text = " ".join(result)
+        res = cv2.imread(image_path)
+        result = self.ocr.read_text_from_image(res)
+
+        doc = self.nlp("".join(result))
+        joined_text = "".join(result)
 
 
         print(joined_text)
@@ -40,7 +45,7 @@ class expense_report:
         return company_name
     def get_date(self, text):
     
-        date_pattern = r'\b\d{1,2}/\d{1,2}/\d{2}\b'
+        date_pattern = r'\b\d{1,2}/\d{1,2}/\d{1,4}\b'
 
         # Find all matches in the text
         dates = re.findall(date_pattern, text)

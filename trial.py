@@ -1,32 +1,49 @@
-intervals = [[1,3],[8,10],[2,6],[15,18]]
+# import easyocr
+# import time
 
-print(intervals)
-intervals.sort(key = lambda x : x[0])
 
-print(intervals)
+# from PIL import Image
+# import pytesseract
+# import cv2
+# import os
 
-# arr = intervals
-# n = len(arr) # size of the array
+# class ImageTextExtractor:
+#     def __init__(self, preprocess=["thresh", "blur"]):
+#         self.preprocess = preprocess
 
-# # sort the given intervals:
-# arr.sort()
-
-# ans = []
-
-# for i in range(n): # select an interval:
-#     start, end = arr[i][0], arr[i][1]
-
-#     # Skip all the merged intervals:
-#     if ans and end <= ans[-1][1]:
-#         continue
-
-#     # check the rest of the intervals:
-#     for j in range(i + 1, n):
-#         if arr[j][0] <= end:
-#             end = max(end, arr[j][1])
+#     def preprocess_image(self, image):
+        
+#         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+#         if self.preprocess[0] == "thresh":
+#             gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 #         else:
-#             break
-#     ans.append([start, end])
+#             gray = cv2.medianBlur(gray, 3)
+        
+#         return gray
+
+#     def read_text_from_image(self, image):
+#         gray = self.preprocess_image(image)
+#         text = pytesseract.image_to_string(gray)
+#         print(text)
+#         return text
+    
+
+# img = cv2.imread("bill4.jpg")
+# ex = ImageTextExtractor()
+
+# ex.read_text_from_image(img)
 
 
-# print(ans)
+import pytesseract
+import cv2
+
+# Update this path to where Tesseract is installed
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Your existing code
+res = pytesseract.image_to_string(cv2.imread("bill5.jpg"))
+
+print(res)
+
+# pytesseract.image_to_string(cv2.imread("bill4.jpg"))
